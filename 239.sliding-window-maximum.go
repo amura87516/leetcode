@@ -5,8 +5,12 @@
  */
 
 // @lc code=start
+
+import (
+	"container/heap"
+)
 func maxSlidingWindow(nums []int, k int) []int {
-    // https://leetcode.com/problems/last-stone-weight/solutions/549801/golang-using-containerheap/
+    // https://pkg.go.dev/container/heap#pkg-overview
 }
 // @lc code=end
 
