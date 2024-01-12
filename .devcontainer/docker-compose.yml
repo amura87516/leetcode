@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  main:
+    image: mcr.microsoft.com/devcontainers/base:jammy
+    volumes:
+      - ..:/workspaces:cached
+      - ${HOME}${USERPROFILE}/.gnupg/secretkey.gpg:/root/.gnupg/secretkey.gpg
+      - ${HOME}${USERPROFILE}/.ssh:/root/.ssh
+    command: sleep infinity
