@@ -18,11 +18,12 @@
 				"editor.tabSize": 4,
 				"editor.indentSize": "tabSize",
 				"dev.containers.copyGitConfig": true,
-				"files.eol": "\n"
+				"files.eol": "\n",
+				"leetcode.workspaceFolder": "/workspaces"
 			},
 			"extensions": [
 				"LeetCode.vscode-leetcode"
-			]
+			],
 		}
 	},
 	// Features to add to the dev container. More info: https://containers.dev/features.
