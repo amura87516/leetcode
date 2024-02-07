@@ -7,50 +7,22 @@
 # @lc code=start
 class Solution:
     def maxProduct(self, nums: List[int]) -> int:
+        dp = [[0, 0] for _ in range(len(nums))]
+        if nums[0] >= 0:
+            dp[0] = [nums[0], 0]
+        else:
+            dp[0] = [0, nums[0]]
 
-        # res = -2e5
-
-        # candidates = []
-        # candidate = []
-        # for num in nums:
-        #     res = max(res, num)
-        #     if num == 1:
-        #         continue
-        #     elif num == 0:
-        #         candidates.append(candidate)
-        #         candidate = []
-        #     else:
-        #         candidate.append(num)
-        # if len(candidate) > 0:
-        #     candidates.append(candidate)
-
-        # for candidate in candidates:
-        #     for i in range(len(candidate)):
-        #         temp = candidate[i]
-        #         res = max(res, temp)
-        #         for j in range(i+1, len(candidate)):
-        #             temp *= candidate[j]
-        #             res = max(res, temp)
-        # return res
-        
-        res = nums[0]
-        status = [nums[0], nums[0]]
+        maxinum = nums[0]
         for i in range(1, len(nums)):
-            new_status = [None, None]
-            if nums[i] < 0:
-                new_status[0] = max(nums[i], status[1] * nums[i])
-                new_status[1] = min(nums[i], status[0] * nums[i])
+            if nums[i] >= 0:
+                dp[i][0] = max(nums[i], nums[i] * dp[i-1][0])
+                dp[i][1] = min(0, nums[i] * dp[i-1][1])
             else:
-                new_status[0] = max(nums[i], status[0] * nums[i])
-                new_status[1] = min(nums[i], status[1] * nums[i])
+                dp[i][0] = max(0, nums[i] * dp[i-1][1])
+                dp[i][1] = min(nums[i], nums[i] * dp[i-1][0])
+            maxinum = max(maxinum, dp[i][0], dp[i][0])
 
-            
-            status = new_status
-            res = max(res, status[0])
-            # print(status)
-
-        return res
-
-        
+        return maxinum
 # @lc code=end
-
+[-2]
