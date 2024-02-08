@@ -7,23 +7,18 @@
 # @lc code=start
 class Solution:
     def minimumPartition(self, s: str, k: int) -> int:
-        partition = []
-        left = 0
-        right = 0
-        while right < len(s):
-            cur_s = s[left: right+1]
-            if int(cur_s) > k:
-                if right == left:
-                    return -1
-                partition.append(s[left: right])
-                left = right
+        res = 0
+        max_window_length = len(str(k))
+        index = 0
+        while index < len(s):
+            if int(s[index:index+max_window_length]) <= k:
+                index += max_window_length
+                res += 1
+            elif max_window_length > 1:
+                index += max_window_length - 1
+                res += 1
             else:
-                right += 1
-
-        if right != left:
-            partition.append(s[left: right])
-
-        return len(partition)
-        
+                return -1
+        return res
 # @lc code=end
 
