@@ -6,6 +6,18 @@
 
 # @lc code=start
 class Solution:
+    # def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        # res = set()
+        # for candidate in candidates:
+        #     if candidate == target:
+        #         res.add(tuple([target]))
+        #     elif candidate < target:
+        #         for temp in self.combinationSum(candidates[i:], target - candidate):
+        #             temp = list(temp) + [candidate]
+        #             temp.sort()
+        #             res.add(tuple(temp))
+        # return res
+        
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         res = []
         for i in range(len(candidates)):

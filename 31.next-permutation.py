@@ -10,21 +10,26 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
+        # search peak from back
+        peak_index = len(nums)-1
+        while peak_index > 0 and nums[peak_index-1] >= nums[peak_index]:
+            peak_index -= 1
 
-        # find first_non_ascending_index
-        first_non_ascending_index = -1
-        for i in range(len(nums)-2, -1, -1):
-            if nums[i] < nums[i+1]:
-                first_non_ascending_index = i
-                break
-        
-        # sort the ascending part
-        nums[first_non_ascending_index+1:] = sorted(nums[first_non_ascending_index+1:])        
-        
-        # swap first_non_ascending_index and first element larger tham this element
-        for i in range(first_non_ascending_index+1, len(nums)):
-            if nums[i] > nums[first_non_ascending_index]:
-                nums[first_non_ascending_index], nums[i] = nums[i], nums[first_non_ascending_index]
-                break
+        if peak_index == 0:
+            nums.sort() 
+        else:
+            # sort RHS
+            temp = nums[peak_index:]
+            temp.sort()
+            nums[peak_index:] = temp
+
+            # pick least number that is greater than nums[peak-1]
+            for index in range(peak_index, len(nums)):
+                if nums[index] > nums[peak_index-1]:
+                    nums[peak_index-1], nums[index] = nums[index], nums[peak_index-1]
+                    break
 # @lc code=end
-
+[1,1,5]
+[1,1]
+[2,3,1]
+[4,2,4,4,3]

@@ -6,23 +6,38 @@
 
 # @lc code=start
 class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        nums = nums.copy()
+
+        # search peak from back
+        peak_index = len(nums)-1
+        while peak_index > 0 and nums[peak_index-1] >= nums[peak_index]:
+            peak_index -= 1
+
+        if peak_index == 0:
+            nums.sort() 
+        else:
+            # sort RHS
+            temp = nums[peak_index:]
+            temp.sort()
+            nums[peak_index:] = temp
+
+            # pick least number that is greater than nums[peak-1]
+            for index in range(peak_index, len(nums)):
+                if nums[index] > nums[peak_index-1]:
+                    nums[peak_index-1], nums[index] = nums[index], nums[peak_index-1]
+                    break
+        return nums
+
     def permute(self, nums: List[int]) -> List[List[int]]:
-        indexes_list = [[0]]
-        for i in range(1, len(nums)):
-            new_indexes_list = []
-            for indexes in indexes_list:
-                for j in range(len(indexes)+1):
-                    temp = indexes.copy()
-                    temp.insert(j, i)
-                    new_indexes_list.append(temp)
-            indexes_list = new_indexes_list
-        
-        res = []
-        for indexes in indexes_list:
-            temp = []
-            for index in indexes:
-                temp.append(nums[index])
-            res.append(temp)
+        res = [nums]
+        next_permutation = self.nextPermutation(nums)
+        while next_permutation != nums:
+            res.append(next_permutation)
+            next_permutation = self.nextPermutation(next_permutation)
         return res
 # @lc code=end
 
