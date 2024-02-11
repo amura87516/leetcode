@@ -9,20 +9,18 @@ class Solution:
     def longestSubstring(self, s: str, k: int) -> int:
         res = 0
         for left in range(len(s)):
-            cnt = [0] * 26
+            counter = [0] * 26
             for right in range(left, len(s)):
-                cnt[ord(s[right]) - ord('a')] += 1
+                counter[ord(s[right]) - ord('a')] += 1
 
                 valid = True
-                for i in range(26):
-                    if cnt[i] > 0 and cnt[i] < k:
+                for cnt in counter:
+                    if cnt > 0 and cnt < k:
                         valid = False
                         break
                 if valid:
                     res = max(res, right - left + 1)
         return res
-
-
-
 # @lc code=end
 
+"ababbc"\n2
